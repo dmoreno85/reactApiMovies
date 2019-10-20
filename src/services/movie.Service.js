@@ -2,14 +2,16 @@ import axios from 'axios'
 
 class movieService {
     constructor() {
-        key = '57100bbbe8d760beada498e98fb84066'
         this.callsDone = 0;
+        this.ApiKey = '57100bbbe8d760beada498e98fb84066'
     }
 
-    async getMovies(category, page = '1') {
+    async getMoviesService(category, page = '1') {
         this.callsDone++;
-        return await axios.get(`https://api.themoviedb.org/3/movie/${category}?api_key=${this.APIKEY}&language=es-ES&page=${page}`)
-    }
+   const {data} = await axios.get(`https://api.themoviedb.org/3/movie/${category}?api_key=${this.ApiKey}&language=es-ES&page=${page}`);
+         return data;
+   
+        };
 
     howManyCalls() {
         return this.callsDone;
