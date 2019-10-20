@@ -13,7 +13,12 @@ class viewCategory extends React.Component {
             current: "",
         }
     }
-
+    // componentDidMount() {
+    //     this.getMovies();
+    // };
+    // componentDidUpdate() {
+    //     this.getMovies();
+    // };
 
     getMovies(data) {
 

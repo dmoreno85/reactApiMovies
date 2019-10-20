@@ -8,16 +8,19 @@ class movieService {
 
     async getMoviesService(category, page = '1') {
         this.callsDone++;
-   const {data} = await axios.get(`https://api.themoviedb.org/3/movie/${category}?api_key=${this.ApiKey}&language=es-ES&page=${page}`);
-         return data;
-   
+        const {data} = await axios.get(`https://api.themoviedb.org/3/movie/${category}?api_key=${this.ApiKey}&language=es-ES&page=${page}`);
+        return data;
+        };
+
+
+        async getMovieId(id){
+        const {data} = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${this.ApiKey}&language=es-ES`);
+        return data;
         };
 
     howManyCalls() {
         return this.callsDone;
     }
-
-
 
 
 }
