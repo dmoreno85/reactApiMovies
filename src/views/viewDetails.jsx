@@ -1,27 +1,57 @@
 import React from 'react'
 import movieService from '../services/movie.Service'
-class viewDetails extends React.Component{
+class viewDetails extends React.Component {
+
+
+    state = {
+        movie: null,
+    };
     constructor(props) {
         super(props);
-        this.componentDidMount = this.getMovies;
-        this.componentDidUpdate = this.getMovies;
-        this.state = {
-            movies: [],
-            current: "",
+        this.componentDidMount = this.getMovie;
+        this.componentDidUpdate = this.getMovie;
+    }
+
+
+    async getMovie() {
+        const currentId = this.props.match.params.id;
+        // console.log(this.props.match.params.id)
+        if (currentId !== this.state.currentId) {
+
+            try {
+                const data = await movieService.getMovieId(currentId);
+                console.log('hey');
+                this.setState({
+                    movie: data,
+                    currentId,
+                })
+
+            } catch (error) {
+                this.setState({
+                    currentId,
+                })
+                console.log('esto es un error' + error)
+            }
+
+
         }
-    }
-
-
-    getMovies() {
 
     }
 
 
-  render()  {return (
-        <div className="ViewDetails">
-            <span>Details</span>
-        </div>
-    )}
+    render() {
+        const movie = this.state.movie
+        console.log(movie)
+        return (
+            <div className="ViewDetails">
+            {movie && (
+                <div> {movie.title}</div>
+            )}
+             
+
+            </div>
+        )
+    }
 }
 
 
